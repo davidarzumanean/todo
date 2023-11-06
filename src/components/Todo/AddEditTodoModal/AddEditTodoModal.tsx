@@ -1,4 +1,4 @@
-import {MouseEvent, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import type {FC, FormEvent} from "react";
 import {Button, Input} from "../../form";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
@@ -80,8 +80,8 @@ export const AddEditTodoModal: FC = () => {
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <h2>Add todo</h2>
         <form onSubmit={handleSubmit}>
-          <Input type='text' value={title} onChange={(e) => setTitle(e.target.value)}/>
-          <Input type='date' min={getTodayDate()} value={dueDate} onChange={(e) => setDueDate(e.target.value)}/>
+          <Input type='text' data-testid='todo-modal-title' value={title} onChange={(e) => setTitle(e.target.value)}/>
+          <Input type='date' data-testid='todo-modal-date' min={getTodayDate()} value={dueDate} onChange={(e) => setDueDate(e.target.value)}/>
           <Button type='submit' disabled={isLoading || !isFormValid}>{modal.data ? 'Save' : 'Add todo'}</Button>
         </form>
       </div>

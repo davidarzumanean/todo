@@ -1,5 +1,4 @@
 import styles from './Footer.module.scss';
-import {CheckIcon} from "../../../assets";
 
 export const Footer = () => {
   const year = new Date().getFullYear();

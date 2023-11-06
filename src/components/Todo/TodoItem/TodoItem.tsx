@@ -42,8 +42,8 @@ export const TodoItem: FC<{ todo: ITodoItem}> = ({todo}) => {
       <td className={`${styles.todoText} ${todo.done ? styles.done : ''}`}>{todo.title}</td>
       <td className={styles.todoDueDate}>{formatReadableDate(todo.dueDate)}</td>
       <td>
-        <Button variant='secondary' onClick={handleEdit}><EditIcon /></Button>
-        <Button variant='secondary' onClick={handleDelete}><DeleteIcon /></Button>
+        <Button variant='secondary' onClick={handleEdit} data-testid='edit'><EditIcon /></Button>
+        <Button variant='secondary' onClick={handleDelete} data-testid='delete'><DeleteIcon /></Button>
       </td>
     </tr>
   )

@@ -35,7 +35,7 @@ export const TodoList = () => {
           <th>Actions</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody data-testid='todo-list'>
         {todoList.map((todo) => (
           <TodoItem key={todo.id} todo={todo}/>
         ))}

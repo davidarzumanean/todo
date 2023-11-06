@@ -1,4 +1,4 @@
-import {getSavedTodoData, getToken, reportError, saveUser, setToken} from "../utils";
+import {getSavedTodoData, reportError, saveUser, setToken} from "../utils";
 import type {ISignInPayload, ISignInResolve} from "../types/types";
 import {ITodoItem} from "../types/types";
 

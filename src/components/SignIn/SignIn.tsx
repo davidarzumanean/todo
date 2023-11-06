@@ -1,10 +1,9 @@
 import type {FormEvent} from "react";
 import styles from './SignIn.module.scss';
 import {useEffect, useState} from "react";
-import {postSignIn} from "../../api";
 import {Button, Input} from "../form";
-import {useAppDispatch} from "../../redux/hooks";
-import {todoActions} from "../../redux/todo.slice";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {todoActions, todoSelectors} from "../../redux/todo.slice";
 import {useNavigate} from "react-router";
 
 export const SignIn = () => {
@@ -12,6 +11,7 @@ export const SignIn = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const isLoggedIn = useAppSelector(todoSelectors.isLoggedIn);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -29,6 +29,10 @@ export const SignIn = () => {
   }
 
   useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/', {replace: true});
+    }
+
     if (username && password) {
       setIsFormValid(true);
     } else {
@@ -42,10 +46,10 @@ export const SignIn = () => {
         <h1>Sign In</h1>
         <form onSubmit={handleSignIn}>
           <label>
-            <Input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+            <Input type="text" placeholder="Username" data-testid='username' onChange={(e) => setUsername(e.target.value)} />
           </label>
           <label>
-            <Input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+            <Input type="password" placeholder="Password" data-testid='password' onChange={(e) => setPassword(e.target.value)} />
           </label>
           <Button type="submit" variant='primary' disabled={!isFormValid || isLoading}>Sign In</Button>
         </form>
