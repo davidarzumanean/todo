@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Todo App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Check it out - [Todo app](https://todo-beige-zeta.vercel.app/signin).
 
 ## Available Scripts
 
