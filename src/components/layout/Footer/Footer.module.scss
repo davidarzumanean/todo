@@ -1,0 +1,16 @@
+.footer {
+  background-color: var(--main-content-accent-bg);
+  border-top: 1px solid var(--border-color);
+  padding: 20px 0;
+  font-size: 14px;
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .copy {
+    text-align: right;
+  }
+}

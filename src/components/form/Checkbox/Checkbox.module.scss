@@ -1,0 +1,36 @@
+.checkbox {
+  display: inline-block;
+  vertical-align: middle;
+
+  .checkmark {
+    width: 25px;
+    height: 25px;
+    background-color: var(--main-content-accent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    transition: background-color 0.3s ease 0s;
+    cursor: pointer;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border: 0 solid white;
+      transform: rotate(45deg);
+      margin: 2px 0 0 8px;
+      transition: width 0.1s ease 0s, height 0.1s ease 0s;
+    }
+  }
+  input {
+    display: none;
+    &:checked + .checkmark {
+      background-color: var(--btn-active-color);
+      &:after {
+        width: 5px;
+        height: 12px;
+        border-width: 0 3px 3px 0;
+      }
+    }
+  }
+}

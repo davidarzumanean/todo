@@ -1,0 +1,32 @@
+.signinContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: center;
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+
+  .signinBox {
+    width: 350px;
+    max-width: 80vw;
+    padding: 20px 30px;
+    background-color: var(--main-content-accent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    box-shadow: var(--box-shadow);
+  }
+
+  label {
+    display: block;
+  }
+  input {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+}
