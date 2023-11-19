@@ -7,6 +7,7 @@ import type {RootState} from "./store";
 interface ITodoState {
   username: string;
   list: ITodoItem[];
+  showPending: boolean;
   modal: {
     isOpen: boolean;
     data: ITodoItem | undefined;
@@ -16,6 +17,7 @@ interface ITodoState {
 const initialState: ITodoState = {
   username: '',
   list: [],
+  showPending: false,
   modal: {
     isOpen: false,
     data: undefined,
@@ -103,6 +105,9 @@ const todoSlice = createSlice({
       });
       saveTodoData(state.list, getToken()!);
     },
+    toggleFilter: (state) => {
+      state.showPending = !state.showPending;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(signIn.fulfilled, (state, action) => {
@@ -150,12 +155,16 @@ export const todoActions = {
 
 export const todoSelectors = {
   username: (state: RootState) => state.todo.username,
-  todoList: (state: RootState) => state.todo.list,
+  todoList: (state: RootState) => {
+    if (state.todo.showPending) return state.todo.list.filter(item => !item.done);
+    return state.todo.list;
+  },
   isLoggedIn: () => getToken(),
   getTodoIndex: (todoId: ITodoItem['id']) => (state: RootState) => {
     return state.todo.list.findIndex((todo) => todo.id === todoId);
   },
-  addEditModal: (state: RootState) => state.todo.modal
+  addEditModal: (state: RootState) => state.todo.modal,
+  showPending: (state: RootState) => state.todo.showPending,
 }
 
 export default todoSlice.reducer;

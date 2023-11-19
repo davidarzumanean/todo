@@ -5,6 +5,7 @@ import {Button} from "../../form";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
 import {todoActions, todoSelectors} from "../../../redux/todo.slice";
 import {useNavigate} from "react-router";
+import {useThemeHook} from "../../../hooks/useTheme.hook";
 
 enum Theme {
   light = 'light',
@@ -12,44 +13,15 @@ enum Theme {
 }
 
 export const Header = () => {
-  const [theme, setTheme] = useState<Theme>(Theme.light);
   const isLoggedIn = useAppSelector(todoSelectors.isLoggedIn);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const toggleTheme = () => {
-    if (theme === Theme.light) {
-      setTheme(Theme.dark);
-      localStorage.setItem('theme', Theme.dark);
-    } else {
-      setTheme(Theme.light);
-      localStorage.setItem('theme', Theme.light);
-    }
-  }
-
-  const getTheme = () => {
-    const localTheme = localStorage.getItem('theme');
-    if (localTheme) {
-      setTheme(localTheme as Theme);
-    }
-  }
+  const {theme, toggleTheme} = useThemeHook();
 
   const handleSignOut = async () => {
     dispatch(todoActions.signOut());
     navigate('/signin');
   }
-
-  useEffect(() => {
-    getTheme();
-  }, []);
-
-  useEffect(() => {
-    if (theme === Theme.dark) {
-      document.body.classList.add(Theme.dark);
-    } else {
-      document.body.classList.remove(Theme.dark);
-    }
-  }, [theme]);
 
   return (
     <header className={styles.headerContainer}>
